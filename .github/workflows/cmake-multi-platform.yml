@@ -1,0 +1,32 @@
+name: Build Windows Qt App
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: '6.5.0'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_mingw'
+
+    - name: Compile Project
+      run: |
+        qmake
+        mingw32-make
+
+    - name: Pack Dependencies (DLLs)
+      run: windeployqt release/
+
+    - name: Upload Artifact for Vanesy
+      uses: actions/upload-artifact@v4
+      with:
+        name: Beneficios_Vanesy
+        path: release/ configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: ctest --build-config ${{ matrix.build_type }}
