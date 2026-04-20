@@ -2,7 +2,6 @@ name: Build Windows Qt App
 on: [push]
 
 env:
-  # Esto silencia la advertencia molesta obligando a usar Node 24
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
@@ -21,12 +20,13 @@ jobs:
 
     - name: Compile Project
       run: |
-        qmake
+        qmake "CONFIG+=release"
         mingw32-make
 
     - name: Pack Dependencies (DLLs)
+      shell: bash
       run: |
-        windeployqt release/
+        windeployqt release/*.exe
 
     - name: Upload Artifact for Vanesy
       uses: actions/upload-artifact@v4
