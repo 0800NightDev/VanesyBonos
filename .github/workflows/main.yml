@@ -26,7 +26,7 @@ jobs:
     - name: Pack Dependencies (DLLs)
       shell: bash
       run: |
-        windeployqt release/*.exe
+        windeployqt --no-translations release/*.exe
 
     - name: Upload Artifact for Vanesy
       uses: actions/upload-artifact@v4
