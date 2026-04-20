@@ -1,0 +1,31 @@
+ 
+name: Build Windows Qt App
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: '6.5.0'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_mingw'
+
+    - name: Compile Project
+      run: |
+        qmake
+        mingw32-make
+
+    - name: Pack Dependencies (DLLs)
+      run: windeployqt release/
+
+    - name: Upload Artifact for Vanesy
+      uses: actions/upload-artifact@v4
+      with:
+        name: Beneficios_Vanesy
+        path: release/
