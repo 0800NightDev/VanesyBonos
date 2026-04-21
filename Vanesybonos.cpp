@@ -58,28 +58,75 @@ int main(int argc, char *argv[]) {
 
     QWidget window;
     window.setWindowTitle("Sistema de Cálculo de Beneficios Laborales - Venezuela");
-    window.resize(850, 750);
+    window.resize(900, 800);
 
     // ==========================================
-    // ESTILOS CSS (QSS) PARA ASPECTO PROFESIONAL
+    // ESTILOS CSS (QSS) PARA ASPECTO PROFESIONAL Y LEGIBLE
     // ==========================================
     window.setStyleSheet(R"(
-        QWidget { background-color: #f4f6f9; }
-        QLabel { font-family: 'Segoe UI'; font-size: 14px; color: #000000ff; }
-        QLabel[title="true"] { font-weight: bold; font-size: 16px; color: #000000ff; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-top: 15px; }
-        QLineEdit { border: 1px solid #000000ff; border-radius: 6px; padding: 6px; font-family: 'Segoe UI'; font-size: 14px; background-color: white; }
-        QLineEdit:focus { border: 2px solid #3498db; }
-        QPushButton { border-radius: 8px; padding: 10px 20px; font-family: 'Segoe UI'; font-size: 14px; font-weight: bold; color: white; }
-        QPushButton#btnCalcular { background-color: #2980b9; border: 1px solid #2471a3; }
-        QPushButton#btnCalcular:hover { background-color: #3498db; }
-        QPushButton#btnLimpiar { background-color: #7f8c8d; border: 1px solid #707b7c; }
-        QPushButton#btnLimpiar:hover { background-color: #95a5a6; }
-        QTextEdit { font-family: 'Segoe UI'; font-size: 14px; border: 1px solid #bdc3c7; border-radius: 8px; padding: 15px; background-color: white; }
+        QWidget {
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI';
+            font-size: 14px;
+            /* FORZAR COLOR DE TEXTO GLOBAL A UN GRIS MUY OSCURO (CASI NEGRO) */
+            color: #2c3e50; 
+        }
+        QLabel[title="true"] {
+            /* FORZAR TÍTULOS DE SECCIÓN A NEGRO PURO */
+            color: #000000;
+            font-weight: bold;
+            font-size: 16px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        QLineEdit {
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            padding: 8px;
+            background-color: white;
+            /* FORZAR TEXTO DE ENTRADA A NEGRO PURO */
+            color: #000000;
+        }
+        QLineEdit:focus {
+            border: 2px solid #3498db;
+        }
+        QPushButton {
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: bold;
+            /* FORZAR TEXTO DE BOTÓN A BLANCO PURO */
+            color: #ffffff; 
+            border: 1px solid transparent;
+        }
+        QPushButton#btnCalcular {
+            background-color: #1a5276; /* AZUL MÁS PROFUNDO Y PROFESIONAL */
+            border-color: #154360;
+        }
+        QPushButton#btnCalcular:hover {
+            background-color: #1f618d;
+        }
+        QPushButton#btnLimpiar {
+            background-color: #515a5a; /* GRIS MÁS PROFUNDO */
+            border-color: #424949;
+        }
+        QPushButton#btnLimpiar:hover {
+            background-color: #616a6a;
+        }
+        QTextEdit {
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: white;
+            /* FORZAR TEXTO DE RESULTADO A GRIS MUY OSCURO */
+            color: #2c3e50;
+        }
     )");
 
     QVBoxLayout *mainLayout = new QVBoxLayout(&window);
-    mainLayout->setContentsMargins(40, 30, 40, 30);
-    mainLayout->setSpacing(20);
+    mainLayout->setContentsMargins(50, 40, 50, 40);
+    mainLayout->setSpacing(25);
 
     // ==========================================
     // CREACIÓN DE CONTROLES
@@ -92,7 +139,7 @@ int main(int argc, char *argv[]) {
     };
 
     QGridLayout *gridLayout = new QGridLayout();
-    gridLayout->setSpacing(15);
+    gridLayout->setSpacing(20);
 
     // Fila 1: Datos Trabajador
     QLineEdit *txtNombre = new QLineEdit();
@@ -131,13 +178,14 @@ int main(int argc, char *argv[]) {
 
     // Botones
     QHBoxLayout *btnLayout = new QHBoxLayout();
+    btnLayout->setSpacing(20);
     QPushButton *btnCalcular = new QPushButton("Calcular Beneficios");
     btnCalcular->setObjectName("btnCalcular");
     QPushButton *btnLimpiar = new QPushButton("Limpiar");
     btnLimpiar->setObjectName("btnLimpiar");
     btnLayout->addStretch();
-    btnLayout->addWidget(btnCalcular, 2);
-    btnLayout->addWidget(btnLimpiar, 1);
+    btnLayout->addWidget(btnCalcular, 3);
+    btnLayout->addWidget(btnLimpiar, 2);
     btnLayout->addStretch();
     mainLayout->addLayout(btnLayout);
 
@@ -233,7 +281,7 @@ int main(int argc, char *argv[]) {
         resultado += "<b><font color='#27ae60' size='4'>TOTAL BENEFICIOS A RECIBIR: Bs. " + locale.toString(totalBeneficios, 'f', 2) + "</font></b>";
 
         // Mostrar texto justificado y renderizado con HTML
-        txtResultado->setHtml("<div align='justify'>" + resultado + "</div>");
+        txtResultado->setHtml("<div align='justify' style='color:#2c3e50'>" + resultado + "</div>");
     });
 
     window.show();
