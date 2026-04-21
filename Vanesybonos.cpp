@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
     window.setStyleSheet(R"(
         QWidget { background-color: #f4f6f9; }
         QLabel { font-family: 'Segoe UI'; font-size: 14px; color: #000000ff; }
-        QLabel[title="true"] { font-weight: bold; font-size: 16px; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-top: 15px; }
+        QLabel[title="true"] { font-weight: bold; font-size: 16px; color: #000000ff; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-top: 15px; }
         QLineEdit { border: 1px solid #000000ff; border-radius: 6px; padding: 6px; font-family: 'Segoe UI'; font-size: 14px; background-color: white; }
         QLineEdit:focus { border: 2px solid #3498db; }
         QPushButton { border-radius: 8px; padding: 10px 20px; font-family: 'Segoe UI'; font-size: 14px; font-weight: bold; color: white; }
